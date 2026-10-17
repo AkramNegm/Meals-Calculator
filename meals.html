@@ -37,5 +37,53 @@
       <ul id="mealsList"></ul>
   </div>
 
+  <script>
+      //بناخد input من اي حد استخدم البرنامج
+      let foodBox = document.querySelector("#foodItem");
+      let pBox = document.querySelector("#protVal");
+      let cBox = document.querySelector("#carbVal");
+      let theButton = document.querySelector("#addMealBtn");
+      
+      let showTotalP = document.querySelector("#totalP");
+      let showTotalC = document.querySelector("#totalC");
+      let myUl = document.querySelector("#mealsList");
+
+      let currentProt = 0;
+      let currentCarb = 0;
+
+      theButton.addEventListener("click", function() {
+          console.log("button clicked"); // testing 
+          
+          let theFood = foodBox.value;
+          let pGrams = Number(pBox.value);
+          let cGrams = Number(cBox.value);
+
+          //ناكد انه كاتب اي كلام المهم يبقي كلام مش ارقام
+          if (theFood == "") {
+              alert("Hey, you forgot to type the food name!");
+          } 
+          // بناكد انه كتب اي ارقام مش سابها فاضيه
+          else if (pBox.value == "" || cBox.value == "") {
+              alert("Please enter the grams, or put 0 if there are none.");
+          } 
+          else {
+              // نسيف القيمه بتعت كل واحد من المدخلات 
+              currentProt=currentProt + pGrams;
+              currentCarb = currentCarb+cGrams;
+
+              showTotalP.innerHTML = "Total Protein: <b>" + currentProt + "</b>";
+              showTotalC.innerHTML = "Total Carbs: <b>" + currentCarb + "</b>";
+
+              // بتعرض كل المدخلات مع شويه اضفات من عندي 
+              let newListItem = "<li>" + theFood + " - Prot: " + pGrams + "g, Carbs: " + cGrams + "g</li>";
+              myUl.innerHTML = myUl.innerHTML + newListItem;
+
+              // علشان يعرف يستخدم الكود تاني او ينهي 
+              foodBox.value = "";
+              pBox.value = "";
+              cBox.value = "";
+          }
+      });
+  </script>
 </body>
 </html>
